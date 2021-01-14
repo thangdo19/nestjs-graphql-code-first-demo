@@ -12,6 +12,10 @@ type Author {
   posts: [Post!]!
 }
 
+type Mutation {
+  login: String!
+}
+
 type Post {
   author: Author!
   authorId: Int!
@@ -23,4 +27,5 @@ type Post {
 type Query {
   authors: [Author!]!
   posts: [Post!]!
+  test: String!
 }

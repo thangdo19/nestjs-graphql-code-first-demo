@@ -1,10 +1,13 @@
 import { forwardRef, Module } from "@nestjs/common";
-import { PostsModule } from "src/posts/posts.module";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { PostsModule } from "src/app/posts/posts.module";
+import { AuthorsRepository } from "./authors.repository";
 import { AuthorsResolver } from "./authors.resolver";
 import { AuthorsService } from "./authors.service";
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([AuthorsRepository]),
     forwardRef(() => PostsModule),
   ],
   providers: [

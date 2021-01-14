@@ -1,7 +1,7 @@
 import { Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
-import { Author } from "src/authors/author.entity";
-import { AuthorsService } from "src/authors/authors.service";
-import { Post } from "./post.entity";
+import { Author } from "src/app/authors/author.model";
+import { AuthorsService } from "src/app/authors/authors.service";
+import { Post } from "./post.model";
 import { PostsService } from "./posts.service";
 
 @Resolver(() => Post)
@@ -16,9 +16,8 @@ export class PostsResolver {
     return this.postsService.getPosts()
   }
 
-  @ResolveField(() => Author, { name: 'author'})
+  @ResolveField(() => Author, { name: 'author' })
   getAuthor(@Parent() post: Post) {
-    console.log('shit:', post)
-    return []
+    return this.authorsService.getAuthor(post.id)
   }
 }

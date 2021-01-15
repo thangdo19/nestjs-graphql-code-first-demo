@@ -1,6 +1,5 @@
 import { UseGuards } from "@nestjs/common";
 import { Mutation, Query, Resolver } from "@nestjs/graphql";
-import { GetUser } from "src/common/decorators/get-user.decorator";
 import { AuthGuard } from "./auth.guard";
 import { AuthService } from "./auth.service";
 
@@ -12,7 +11,7 @@ export class AuthResolver {
 
   @Query(() => String, { name: 'test' })
   @UseGuards(AuthGuard)
-  test(@GetUser() user: any): string {
+  test(): string {
     return 'yia'
   }
 

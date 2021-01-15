@@ -12,8 +12,33 @@ type Author {
   posts: [Post!]!
 }
 
+input Filter {
+  field: String!
+  op: Operation!
+  relationField: String
+  values: [String!]!
+}
+
+input FiltersExpression {
+  childExpressions: [FiltersExpression!]!
+  filters: [Filter!]!
+  operator: Operator
+}
+
 type Mutation {
   login: String!
+}
+
+enum Operation {
+  EQ
+  GE
+  IN
+  LIKE
+}
+
+enum Operator {
+  AND
+  OR
 }
 
 type Post {
@@ -25,7 +50,7 @@ type Post {
 }
 
 type Query {
-  authors: [Author!]!
+  authors(filter: FiltersExpression!): [Author!]!
   posts: [Post!]!
   test: String!
 }

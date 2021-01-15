@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { FindManyOptions, FindOneOptions } from "typeorm";
 import { Post } from "./post.model";
 import { PostsRepository } from "./posts.repository";
 
@@ -8,11 +9,19 @@ export class PostsService {
     private postsRepository: PostsRepository,
   ) {}
 
-  getPost(id: number): Promise<Post> {
+  getOne(id: number): Promise<Post> {
     return this.postsRepository.findOne({ where: { id } })
   }
 
-  getPosts(): Promise<Post[]> {
+  getOneWithOptions(options: FindOneOptions) {
+    return this.postsRepository.findOne(options)
+  }
+
+  getMany(): Promise<Post[]> {
     return this.postsRepository.find()
+  }
+
+  getManyWithOptions(options: FindManyOptions) {
+    return this.postsRepository.find(options)
   }
 }

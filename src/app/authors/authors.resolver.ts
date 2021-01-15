@@ -1,6 +1,7 @@
-import { Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
+import { Args, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
 import { Post } from "src/app/posts/post.model";
 import { PostsService } from "src/app/posts/posts.service";
+import { FiltersExpression } from "src/common/inputs/filters-expression.input";
 import { Author } from "./author.model";
 import { AuthorsService } from "./authors.service";
 
@@ -12,13 +13,16 @@ export class AuthorsResolver {
   ) {}
 
   @Query(() => [Author], { name: 'authors' })
-  getAuthors(): Promise<Author[]> {
-    return this.authorsService.getAuthors()
+  getAuthors(
+    @Args('filter') filters: FiltersExpression
+  ): Promise<Author[]> {
+    return this.authorsService.getAuthors(filters)
   }
 
   @ResolveField(() => [Post], { name: 'posts' })
   getPosts(@Parent() author: Author) {
-    console.log(author)
-    return [] as Post[]
+    return this.postsService.getManyWithOptions({
+      where: { authorId: author.id }
+    })
   }
 }

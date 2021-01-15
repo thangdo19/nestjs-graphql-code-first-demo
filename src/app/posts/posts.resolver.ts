@@ -13,7 +13,7 @@ export class PostsResolver {
 
   @Query(() => [Post], { name: 'posts' })
   getPosts() {
-    return this.postsService.getPosts()
+    return this.postsService.getMany()
   }
 
   @ResolveField(() => Author, { name: 'author' })

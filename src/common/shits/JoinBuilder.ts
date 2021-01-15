@@ -32,7 +32,8 @@ export class JoinBuilder {
         f.relationField
       )
     })
-    filters.childExpressions.forEach(child => this.handleFilter(queryBuilder, child))
+    if (filters.childExpressions)
+      filters.childExpressions.forEach(child => this.handleFilter(queryBuilder, child))
   }
 
   private static addJoinQueryToQueryBuilder<T>(

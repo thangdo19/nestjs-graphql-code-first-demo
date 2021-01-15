@@ -20,7 +20,7 @@ input Filter {
 }
 
 input FiltersExpression {
-  childExpressions: [FiltersExpression!]!
+  childExpressions: [FiltersExpression!]
   filters: [Filter!]!
   operator: Operator
 }

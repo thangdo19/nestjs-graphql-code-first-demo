@@ -12,7 +12,7 @@ export class FiltersExpression {
   @IsArray()
   filters: [Filter]
 
-  @Field(() => [FiltersExpression])
+  @Field(() => [FiltersExpression], { nullable: true })
   @IsArray()
   childExpressions: [FiltersExpression]
 }

@@ -18,6 +18,6 @@ export class PostsResolver {
 
   @ResolveField(() => Author, { name: 'author' })
   getAuthor(@Parent() post: Post) {
-    return this.authorsService.getAuthor(post.id)
+    return this.authorsService.getAuthor(post.authorId)
   }
 }
